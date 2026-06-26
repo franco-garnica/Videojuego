@@ -1,2 +1,2 @@
 # Videojuego
-Carpeta del TP final con sarmiento, Sandoval y Garnica
+Carpeta del TP final con Sarmiento, Sandoval y Garnica
