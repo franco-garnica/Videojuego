@@ -17,7 +17,7 @@ void setup() {
 
   menu = new Menu();
   mapa = new Mapa();
-  tanque1 = new Tanque(600, 600, imagenTanque1);
+  tanque1 = new Tanque1(600, 600, imagenTanque1);
   tanque2 = new Tanque2(150, 200, imagenTanque2);
 }
 
