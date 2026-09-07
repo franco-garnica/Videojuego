@@ -46,9 +46,12 @@ class Mapa {
 
   void mostrar() {
 
+    // FONDO
+    image(imagenPasto, 0, 0, width, height);
+
+    // PAREDES
     fill(#D77643);
 
-    // Dibujamos todas las paredes
     for (int i = 0; i < posX.length; i++) {
 
       rect(
