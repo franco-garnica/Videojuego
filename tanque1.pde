@@ -1,4 +1,4 @@
-class Tanque {
+class Tanque1 {
 
   float x;
   float y;
@@ -10,7 +10,7 @@ class Tanque {
 
   PImage img; // Variable para almacenar su imagen propia
 
-  Tanque(float x, float y, PImage img) {
+  Tanque1(float x, float y, PImage img) {
     this.x = x;
     this.y = y;
     this.img = img; // Guardamos la imagen
