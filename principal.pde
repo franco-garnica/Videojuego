@@ -8,12 +8,14 @@ Tanque2 tanque2;
 
 PImage imagenTanque1;
 PImage imagenTanque2;
+PImage imagenPasto;
 
 void setup() {
   size(800, 800);
 
   imagenTanque1 = loadImage("tanque1.png");
   imagenTanque2 = loadImage("tanque2.png");
+  imagenPasto = loadImage("pasto.png");
 
   menu = new Menu();
   mapa = new Mapa();
