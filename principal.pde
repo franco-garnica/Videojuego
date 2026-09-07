@@ -3,7 +3,7 @@ int estadoJuego = 0;
 
 Menu menu;
 Mapa mapa;
-Tanque tanque1;
+Tanque1 tanque1;
 Tanque2 tanque2;
 
 PImage imagenTanque1;
