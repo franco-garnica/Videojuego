@@ -20,7 +20,7 @@ class Mapa {
     12
   };
 
-  // Ancho de cada pared
+  // Cantidad de cuadrados de ancho
   int[] ancho = {
     1, 1, 1, 1, 1,
     1, 1,
@@ -29,7 +29,7 @@ class Mapa {
     4
   };
 
-  // Alto de cada pared
+  // Cantidad de cuadrados de alto
   int[] alto = {
     6, 6, 4, 4, 6,
     1, 1,
@@ -38,46 +38,52 @@ class Mapa {
     3
   };
 
-
   Mapa() {
+
+    // El mapa está dividido en 16 x 16
     escala = width / 16;
   }
 
-
   void mostrar() {
 
-    // FONDO
-    image(imagenPasto, 0, 0, width, height);
+    rectMode(CORNER);
 
-    // PAREDES
     fill(#D77643);
 
     for (int i = 0; i < posX.length; i++) {
 
-      rect(
-        posX[i] * escala,
-        posY[i] * escala,
-        ancho[i] * escala,
-        alto[i] * escala
-      );
+      float x = posX[i] * escala;
+      float y = posY[i] * escala;
+
+      float w = ancho[i] * escala;
+      float h = alto[i] * escala;
+
+      rect(x, y, w, h);
     }
   }
 
-
-  // Comprueba si un objeto choca con alguna pared
-  boolean colisiona(float x, float y, float anchoTanque, float altoTanque) {
+  boolean colisiona(
+    float x,
+    float y,
+    float anchoTanque,
+    float altoTanque
+    ) {
 
     for (int i = 0; i < posX.length; i++) {
 
       float paredX = posX[i] * escala;
       float paredY = posY[i] * escala;
+
       float paredAncho = ancho[i] * escala;
       float paredAlto = alto[i] * escala;
 
-      if (x + anchoTanque/2 > paredX &&
-          x - anchoTanque/2 < paredX + paredAncho &&
-          y + altoTanque/2 > paredY &&
-          y - altoTanque/2 < paredY + paredAlto) {
+      // Comprobamos si el tanque toca la pared
+      if (
+        x + anchoTanque / 2 > paredX &&
+        x - anchoTanque / 2 < paredX + paredAncho &&
+        y + altoTanque / 2 > paredY &&
+        y - altoTanque / 2 < paredY + paredAlto
+        ) {
 
         return true;
       }
@@ -85,4 +91,4 @@ class Mapa {
 
     return false;
   }
-}
+}  
