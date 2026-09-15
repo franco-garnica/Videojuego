@@ -8,46 +8,63 @@ class Tanque1 {
   float ancho = 28;
   float alto = 28;
 
-  PImage img; // Variable para almacenar su imagen propia
+  float angulo = 0;
 
-  Tanque1(float x, float y, PImage img) {
-    this.x = x;
-    this.y = y;
-    this.img = img; // Guardamos la imagen
+  Tanque1(float xInicial, float yInicial) {
+    x = xInicial;
+    y = yInicial;
   }
 
-  void mover(float otroX, float otroY, float otroAncho, float otroAlto) {
+  void mover() {
 
-    float nuevoX = x;
-    float nuevoY = y;
+    float movimientoX = 0;
+    float movimientoY = 0;
 
     if (keyPressed) {
-      if (key == 'w' || key == 'W') nuevoY -= velocidad;
-      if (key == 's' || key == 'S') nuevoY += velocidad;
-      if (key == 'a' || key == 'A') nuevoX -= velocidad;
-      if (key == 'd' || key == 'D') nuevoX += velocidad;
+      if (key == 'a' || key == 'A') movimientoX -= 1;
+      if (key == 'd' || key == 'D') movimientoX += 1;
+      if (key == 'w' || key == 'W') movimientoY -= 1;
+      if (key == 's' || key == 'S') movimientoY += 1;
     }
 
-    boolean colParedX = mapa.colisiona(nuevoX, y, ancho, alto);
-    boolean colTanqueX = colisionEntreTanques(nuevoX, y, ancho, alto, otroX, otroY, otroAncho, otroAlto);
+    // Evita que el movimiento diagonal sea más rápido
+    if (movimientoX != 0 && movimientoY != 0) {
+      movimientoX *= 0.7071;
+      movimientoY *= 0.7071;
+    }
 
-    if (!colParedX && !colTanqueX) {
+    float nuevoX = x + movimientoX * velocidad;
+    float nuevoY = y + movimientoY * velocidad;
+
+    // Gira el tanque según la dirección del movimiento
+    if (movimientoX != 0 || movimientoY != 0) {
+      angulo = atan2(movimientoY, movimientoX);
+    }
+
+    nuevoX = constrain(nuevoX, ancho / 2, width - ancho / 2);
+    nuevoY = constrain(nuevoY, alto / 2, height - alto / 2);
+
+    // Colisión con las paredes
+    if (!mapa.colisiona(nuevoX, y, ancho, alto)) {
       x = nuevoX;
     }
 
-    boolean colParedY = mapa.colisiona(x, nuevoY, ancho, alto);
-    boolean colTanqueY = colisionEntreTanques(x, nuevoY, ancho, alto, otroX, otroY, otroAncho, otroAlto);
-
-    if (!colParedY && !colTanqueY) {
+    if (!mapa.colisiona(x, nuevoY, ancho, alto)) {
       y = nuevoY;
     }
-
-    x = constrain(x, ancho/2, width - ancho/2);
-    y = constrain(y, alto/2, height - alto/2);
   }
 
   void mostrar() {
+
     imageMode(CENTER);
-    image(img, x, y, 40, 40); // Dibujamos su imagen sin tintes
+
+    pushMatrix();
+
+    translate(x, y);
+    rotate(angulo);
+
+    image(imagenTanque1, 0, 0, 40, 40);
+
+    popMatrix();
   }
 }
