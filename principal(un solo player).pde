@@ -1,4 +1,4 @@
-// Estados del juego: 0 = Menu, 1 = Jugando
+// Estados del juego: 0 = Menu, 1 = Jugando//
 int estadoJuego = 0;
 
 Menu menu;
