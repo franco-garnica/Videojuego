@@ -27,18 +27,12 @@ class Tanque1 {
       if (key == 's' || key == 'S') movimientoY += 1;
     }
 
-    // Evita que el movimiento diagonal sea más rápido
-    if (movimientoX != 0 && movimientoY != 0) {
-      movimientoX *= 0.7071;
-      movimientoY *= 0.7071;
-    }
-
     float nuevoX = x + movimientoX * velocidad;
     float nuevoY = y + movimientoY * velocidad;
 
     // Gira el tanque según la dirección del movimiento
     if (movimientoX != 0 || movimientoY != 0) {
-      angulo = atan2(movimientoY, movimientoX);
+      angulo = atan2(movimientoX, movimientoY);
     }
 
     nuevoX = constrain(nuevoX, ancho / 2, width - ancho / 2);
