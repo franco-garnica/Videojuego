@@ -21,10 +21,10 @@ class Torreta {
     rectMode(CENTER);
 
     fill(#D9D11C);
-    rect(0, 0, 15, 15);
+    rect(0, 0, 13, 15);
 
     fill(#FFB800);
-    rect(0, -15, 5, 25);
+    rect(0, -15, 5, 20);
 
     popMatrix();
   }
