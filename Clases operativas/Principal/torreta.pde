@@ -1,0 +1,31 @@
+class Torreta {
+
+  Tanque1 tanque;
+  float angulo;
+
+  Torreta(Tanque1 tanque) {
+    this.tanque = tanque;
+  }
+
+  void mover() {
+    angulo = atan2(mouseY - tanque.y, mouseX - tanque.x) + HALF_PI;
+  }
+
+  void mostrar() {
+
+    pushMatrix();
+
+    translate(tanque.x, tanque.y);
+    rotate(angulo);
+
+    rectMode(CENTER);
+
+    fill(#D9D11C);
+    rect(0, 0, 13, 15);
+
+    fill(#FFB800);
+    rect(0, -15, 5, 20);
+
+    popMatrix();
+  }
+}
