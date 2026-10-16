@@ -1,1 +1,56 @@
 
+class Proyectil {
+  float x, y;
+  float velocidad = 7;
+  float angulo;
+  float radio = 6;
+
+  float vx, vy;
+
+  Proyectil(float xInicial, float yInicial, float direccion) {
+    x = xInicial;
+    y = yInicial;
+    angulo = direccion;
+
+    vx = cos(angulo) * velocidad;
+    vy = sin(angulo) * velocidad;
+  }
+
+  void mover() {
+    float nuevoX = x + vx;
+    float nuevoY = y + vy;
+
+    // Rebote horizontal contra las paredes
+    if (mapa.colisiona(nuevoX, y, radio * 2, radio * 2)) {
+      vx *= -1;
+    } else {
+      x = nuevoX;
+    }
+
+    // Rebote vertical contra las paredes
+    if (mapa.colisiona(x, nuevoY, radio * 2, radio * 2)) {
+      vy *= -1;
+    } else {
+      y = nuevoY;
+    }
+
+    // Actualizar el ángulo después del rebote
+    angulo = atan2(vy, vx);
+  }
+
+  void mostrar() {
+    pushStyle();
+
+    fill(255, 220, 0);
+    stroke(0);
+    strokeWeight(1);
+    ellipse(x, y, radio * 2, radio * 2);
+
+    popStyle();
+  }
+
+  boolean fueraDePantalla() {
+    return x < 0 || x > width || y < 0 || y > height;
+  }
+}
+
