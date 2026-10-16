@@ -1,0 +1,105 @@
+
+class Bot {
+  float x, y, velocidad = 2, ancho = 28, alto = 28;
+  float angulo = 0, destinoX, destinoY;
+  int escala = 50, contadorRuta = 0;
+
+  Bot(float xInicial, float yInicial) {
+    x = int(xInicial / escala) * escala + escala / 2;
+    y = int(yInicial / escala) * escala + escala / 2;
+    destinoX = x;
+    destinoY = y;
+  }
+
+  void mover() {
+    if (++contadorRuta >= 15) {
+      buscarCamino();
+      contadorRuta = 0;
+    }
+
+    float nx = x, ny = y;
+
+    if (abs(destinoX - x) > 1) {
+      nx += destinoX > x ? velocidad : -velocidad;
+      angulo = destinoX > x ? 0 : PI;
+    } else if (abs(destinoY - y) > 1) {
+      ny += destinoY > y ? velocidad : -velocidad;
+      angulo = destinoY > y ? HALF_PI : -HALF_PI;
+    }
+
+    if (nx >= ancho / 2 && nx <= width - ancho / 2 &&
+        ny >= alto / 2 && ny <= height - alto / 2 &&
+        !mapa.colisiona(nx, ny, ancho, alto)) {
+      x = nx;
+      y = ny;
+    } else {
+      contadorRuta = 15;
+    }
+  }
+
+  void buscarCamino() {
+    int c = width / escala, f = height / escala, total = c * f;
+    int inicio = int(y / escala) * c + int(x / escala);
+    int objetivo = int(tanque1.y / escala) * c + int(tanque1.x / escala);
+
+    boolean[] visitada = new boolean[total];
+    int[] anterior = new int[total], cola = new int[total];
+
+    for (int i = 0; i < total; i++) anterior[i] = -1;
+
+    int primero = 0, ultimo = 0;
+    cola[ultimo++] = inicio;
+    visitada[inicio] = true;
+
+    int[] dx = {0, 0, -1, 1}, dy = {-1, 1, 0, 0};
+
+    while (primero < ultimo) {
+      int actual = cola[primero++];
+      if (actual == objetivo) break;
+
+      for (int i = 0; i < 4; i++) {
+        int px = actual % c + dx[i], py = actual / c + dy[i];
+
+        if (px < 0 || px >= c || py < 0 || py >= f) continue;
+
+        int vecino = py * c + px;
+        float vx = px * escala + escala / 2;
+        float vy = py * escala + escala / 2;
+
+        if (!visitada[vecino] &&
+            !mapa.colisiona(vx, vy, ancho, alto)) {
+          visitada[vecino] = true;
+          anterior[vecino] = actual;
+          cola[ultimo++] = vecino;
+        }
+      }
+    }
+
+    if (!visitada[objetivo]) {
+      destinoX = x;
+      destinoY = y;
+      return;
+    }
+
+    int paso = objetivo;
+    while (anterior[paso] != -1 && anterior[paso] != inicio)
+      paso = anterior[paso];
+
+    if (paso == inicio) {
+      destinoX = x;
+      destinoY = y;
+    } else {
+      destinoX = paso % c * escala + escala / 2;
+      destinoY = paso / c * escala + escala / 2;
+    }
+  }
+
+  void mostrar() {
+    imageMode(CENTER);
+    pushMatrix();
+    translate(x, y);
+    rotate(angulo);
+    image(imagenBot, 0, 0, 40, 40);
+    popMatrix();
+  }
+}
