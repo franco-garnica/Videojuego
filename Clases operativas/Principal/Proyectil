@@ -1,0 +1,28 @@
+class Proyectil {
+  PVector pos;
+  PVector vel;
+
+  Proyectil(float x, float y, float angulo) {
+    pos = new PVector(x, y);
+    vel = new PVector(cos(angulo), sin(angulo));
+    vel.mult(5);
+  }
+  
+
+  void mover() {
+    pos.add(vel);
+
+    if (mapa.colisiona(pos.x + vel.x, pos.y, 8, 8)) {
+      vel.x *= -1;
+    }
+
+    if (mapa.colisiona(pos.x, pos.y + vel.y, 8, 8)) {
+      vel.y *= -1;
+    }
+  }
+
+  void mostrar() {
+    fill(0, 0, 0);
+    ellipse(pos.x, pos.y, 8, 8);
+  }
+}
