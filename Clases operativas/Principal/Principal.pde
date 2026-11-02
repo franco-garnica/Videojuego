@@ -1,6 +1,4 @@
-int estadoJuego = 0;
-
-Menu menu;
+int estadoJuego = 0;Menu menu;
 Mapa mapa;
 Tanque1 tanque1;
 Torreta torreta;
@@ -8,66 +6,65 @@ Torreta torreta;
 PImage imagenTanque1;
 PImage imagenPasto;
 
+ArrayList<Proyectil> proyectiles = new ArrayList<Proyectil>();
+
 void setup() {
-  size(800, 800);
+size(800, 800);
+frameRate(60);
 
-  // Imagen del tanque
   imagenTanque1 = loadImage("tanque1.png");
-
-  // Imagen del pasto
-  imagenPasto = loadImage("pasto.png");
+imagenPasto = loadImage("pasto.png");
 
   menu = new Menu();
-  mapa = new Mapa();
-
-  tanque1 = new Tanque1(600, 600);
-
-  // La torreta pertenece al tanque
-  torreta = new Torreta(tanque1);
+mapa = new Mapa();
+tanque1 = new Tanque1(600, 600);
+torreta = new Torreta(tanque1);
 }
 
 void draw() {
+if (estadoJuego == 0) {
+menu.mostrar();
+} else if (estadoJuego == 1) {
+imageMode(CORNER);
+image(imagenPasto, 0, 0, width, height);
+mapa.mostrar();
 
-  if (estadoJuego == 0) {
+tanque1.mover();
+torreta.mover();
 
-    menu.mostrar();
+tanque1.mostrar();
+torreta.mostrar();
 
-  } else if (estadoJuego == 1) {
-
-    // Dibujamos el fondo
-    dibujarFondo();
-
-    // Dibujamos el mapa
-    mapa.mostrar();
-
-    // Movemos el tanque
-    tanque1.mover();
-
-    // Movemos la torreta hacia el mouse
-    torreta.mover();
-
-    // Primero el chasis
-    tanque1.mostrar();
-
-    // Después la torreta
-    torreta.mostrar();
-  }
+for (int i = 0; i < proyectiles.size(); i++) {
+  Proyectil p = proyectiles.get(i);
+  p.mover();
+  p.mostrar();
 }
 
-void dibujarFondo() {
 
-  imageMode(CORNER);
-
-  for (int x = 0; x < width; x += imagenPasto.width) {
-    for (int y = 0; y < height; y += imagenPasto.height) {
-      image(imagenPasto, x, y);
-    }
   }
 }
 
 void mousePressed() {
+if (estadoJuego == 0) {
+menu.comprobarBoton();
+} else if (estadoJuego == 1 && mouseButton == LEFT) {
+float angulo = atan2(
+mouseY - tanque1.y,
+mouseX - tanque1.x
+);
+proyectiles.add(
+  new Proyectil(tanque1.x, tanque1.y, angulo)
+);
 
-  if (estadoJuego == 0) {
-    menu.comprobarBoton();
+
   }
+}
+
+void keyPressed() {
+if (key == 'r' || key == 'R') {
+tanque1 = new Tanque1(600, 600);
+torreta = new Torreta(tanque1);
+proyectiles.clear();
+}
 }
