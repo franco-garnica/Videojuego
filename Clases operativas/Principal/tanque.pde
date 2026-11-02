@@ -3,7 +3,7 @@ class Tanque1 {
   float x;
   float y;
 
-  float velocidad = 3;
+  float velocidad = 5;
 
   float ancho = 28;
   float alto = 28;
@@ -62,3 +62,5 @@ class Tanque1 {
     popMatrix();
   }
 }
+
+
