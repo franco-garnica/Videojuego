@@ -1,13 +1,15 @@
 class Proyectil {
   PVector pos;
   PVector vel;
+  PImage imagenBala;
 
   Proyectil(float x, float y, float angulo) {
     pos = new PVector(x, y);
     vel = new PVector(cos(angulo), sin(angulo));
-    vel.mult(5);
+    vel.mult(8);
+
+    imagenBala = loadImage("bala.png");
   }
-  
 
   void mover() {
     pos.add(vel);
@@ -22,7 +24,12 @@ class Proyectil {
   }
 
   void mostrar() {
-    fill(0, 0, 0);
-    ellipse(pos.x, pos.y, 8, 8);
+    imageMode(CENTER);
+
+    pushMatrix();
+    translate(pos.x, pos.y);
+    rotate(atan2(vel.y, vel.x));
+    image(imagenBala, 0, 0, 35, 35);
+    popMatrix();
   }
 }
