@@ -2,6 +2,7 @@ class Mapa {
 
   int escala = 50;
 
+ PImage metal;
   // Cada fila tiene:
   // {posX, posY, ancho, alto}
 
@@ -25,24 +26,26 @@ class Mapa {
 
     {7, 12, 4, 3}
   };
-
+ Mapa() {
+    metal = loadImage("metal.png");
+  }
 
   // Dibujar el mapa
   void mostrar() {
 
-    rectMode(CORNER);
-
-    fill(#D77643);
+    imageMode(CORNER);
 
     for (int i = 0; i < paredes.length; i++) {
+int x = paredes[i][0] * escala;
+      int y = paredes[i][1] * escala;
+      int ancho = paredes[i][2] * escala;
+      int alto = paredes[i][3] * escala;
 
-      float x = paredes[i][0] * escala;
-      float y = paredes[i][1] * escala;
-
-      float ancho = paredes[i][2] * escala;
-      float alto = paredes[i][3] * escala;
-
-      rect(x, y, ancho, alto);
+      for (int px = x; px < x + ancho; px += escala) {
+        for (int py = y; py < y + alto; py += escala) {
+          image(metal, px, py, escala, escala);
+        }
+      }
     }
   }
 
