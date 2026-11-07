@@ -1,0 +1,36 @@
+class Proyectil {
+  PVector pos;
+  PVector vel;
+  PImage imagenBala;
+
+  Proyectil(float x, float y, float angulo) {
+    pos = new PVector(x, y);
+    vel = new PVector(cos(angulo), sin(angulo));
+    vel.mult(8);
+
+    imagenBala = loadImage("bala.png");
+    imagenBala.resize(40,40);
+  }
+
+  void mover() {
+    pos.add(vel);
+
+    if (mapa.colisiona(pos.x + vel.x, pos.y, 8, 8)) {
+      vel.x *= -1;
+    }
+
+    if (mapa.colisiona(pos.x, pos.y + vel.y, 8, 8)) {
+      vel.y *= -1;
+    }
+  }
+
+  void mostrar() {
+    imageMode(CENTER);
+
+    pushMatrix();
+    translate(pos.x, pos.y);
+    rotate(atan2(vel.y, vel.x));
+    image(imagenBala, 0, 0);
+    popMatrix();
+  }
+}
