@@ -1,0 +1,23 @@
+class Interfaz {
+
+  PImage imagenVida;
+
+  Interfaz() {
+    // Cargar imagen que representa una vida
+    imagenVida = loadImage("Engranaje.png");
+  }
+
+  void mostrarVidas(Tanque1 tanque) {
+
+    imageMode(CENTER);
+
+    // Dibujar una imagen por cada vida disponible
+    for (int i = 0; i < tanque.vidas; i++) {
+
+      float x = 35 + (i * 35);
+      float y = 40;
+
+      image(imagenVida, x, y);
+    }
+  }
+}
