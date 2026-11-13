@@ -4,6 +4,8 @@ class Mapa {
   int escalaY = 50;
 
   PImage metal;
+  PImage imagenPasto;
+
   // Cada fila tiene:
   // {posX, posY, ancho, alto}
 
@@ -28,9 +30,10 @@ class Mapa {
     {7, 12, 4, 3}
   };
   Mapa() {
-    metal = loadImage("metal.png");
+    metal = loadImage("Metal.png");
     metal.resize(escalaX,escalaY);
-    
+     imagenPasto = loadImage("Pasto.png");
+  imagenPasto.resize(width, height);
   }
 
   // Dibujar el mapa
