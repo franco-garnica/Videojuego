@@ -1,7 +1,14 @@
 class Torreta {
 
+  PImage imagenTorreta;
+
+  
   Tanque1 tanque;
   float angulo;
+  
+  Torreta(){  imagenTorreta = loadImage("Torreta.png");
+  imagenTorreta.resize(100, 100);
+  }
 
   Torreta(Tanque1 tanque) {
     this.tanque = tanque;
