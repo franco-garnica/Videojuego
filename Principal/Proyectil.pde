@@ -8,7 +8,7 @@ class Proyectil {
     vel = new PVector(cos(angulo), sin(angulo));
     vel.mult(8);
 
-    imagenBala = loadImage("bala.png");
+    imagenBala = loadImage("Bala.png");
     imagenBala.resize(40,40);
   }
 
