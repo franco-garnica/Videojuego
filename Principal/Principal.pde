@@ -3,28 +3,19 @@ Menu menu;
 Mapa mapa;
 Tanque1 tanque1;
 Torreta torreta;
-
-PImage imagenTanque1;
-PImage imagenPasto;
-PImage imagenTorreta;
+Interfaz interfaz;
 
 ArrayList<Proyectil> proyectiles = new ArrayList<Proyectil>();
 
 void setup() {
-  fullScreen(P2D);
-  //frameRate(60);
-
-  imagenTanque1 = loadImage("TanquePesado.png");
-  imagenTanque1.resize(120, 120);
-  imagenPasto = loadImage("pasto.png");
-  imagenPasto.resize(width, height);
-  imagenTorreta = loadImage("Torreta.png");
-  imagenTorreta.resize(100, 100);
+  //fullScreen(P2D);
+size(800,800);
 
   menu = new Menu();
   mapa = new Mapa();
   tanque1 = new Tanque1(600, 600);
   torreta = new Torreta(tanque1);
+  interfaz = new Interfaz();
 }
 
 void draw() {
@@ -32,14 +23,14 @@ void draw() {
     menu.mostrar();
   } else if (estadoJuego == 1) {
     imageMode(CORNER);
-    image(imagenPasto, 0, 0);
     mapa.mostrar();
-
+    
     tanque1.mover();
     torreta.mover();
 
     tanque1.mostrar();
     torreta.mostrar();
+    interfaz.mostrarVidas(tanque1);
 
     for (int i = 0; i < proyectiles.size(); i++) {
       Proyectil p = proyectiles.get(i);
