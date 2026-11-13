@@ -1,4 +1,3 @@
-
 class Menu {
 
   PImage fondo;
