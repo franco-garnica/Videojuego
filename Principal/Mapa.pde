@@ -1,3 +1,4 @@
+
 class Mapa {
 
   int escalaX = 50;
@@ -29,11 +30,10 @@ class Mapa {
 
     {7, 12, 4, 3}
   };
+
   Mapa() {
     metal = loadImage("Metal.png");
-    metal.resize(escalaX,escalaY);
-     imagenPasto = loadImage("Pasto.png");
-  imagenPasto.resize(width, height);
+    imagenPasto = loadImage("Pasto.png");
   }
 
   // Dibujar el mapa
@@ -41,7 +41,12 @@ class Mapa {
 
     imageMode(CORNER);
 
+    // Dibujar el pasto ocupando toda la pantalla
+    image(imagenPasto, 0, 0, width, height);
+
+    // Dibujar las paredes metálicas
     for (int i = 0; i < paredes.length; i++) {
+
       int x = paredes[i][0] * escalaX;
       int y = paredes[i][1] * escalaY;
       int ancho = paredes[i][2] * escalaX;
@@ -49,12 +54,11 @@ class Mapa {
 
       for (int px = x; px < x + ancho; px += escalaX) {
         for (int py = y; py < y + alto; py += escalaY) {
-          image(metal, px, py);
+          image(metal, px, py, escalaX, escalaY);
         }
       }
     }
   }
-
 
   // Detectar colisiones
   boolean colisiona(float x, float y, float anchoTanque, float altoTanque) {
@@ -66,7 +70,6 @@ class Mapa {
 
       float paredAncho = paredes[i][2] * escalaX;
       float paredAlto = paredes[i][3] * escalaY;
-
 
       if (x + anchoTanque / 2 > paredX &&
         x - anchoTanque / 2 < paredX + paredAncho &&
@@ -80,3 +83,4 @@ class Mapa {
     return false;
   }
 }
+
