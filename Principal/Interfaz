@@ -14,10 +14,10 @@ class Interfaz {
     // Dibujar una imagen por cada vida disponible
     for (int i = 0; i < tanque.vidas; i++) {
 
-      float x = 35 + (i * 35);
-      float y = 40;
+      float x = 35 + (i * 60);
+      float y = 40; // posible cambio
 
-      image(imagenVida, x, y);
+      image(imagenVida, x, y, 80, 80);
     }
   }
 }
