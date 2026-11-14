@@ -8,13 +8,14 @@ Interfaz interfaz;
 ArrayList<Proyectil> proyectiles = new ArrayList<Proyectil>();
 
 void setup() {
-  //fullScreen(P2D);
-size(800,800);
+  fullScreen(P2D);
+//size(800,800);
 
   menu = new Menu();
   mapa = new Mapa();
   tanque1 = new Tanque1(600, 600);
-  torreta = new Torreta(tanque1);
+  torreta = new Torreta();
+  torreta.tanque = tanque1;
   interfaz = new Interfaz();
 }
 
@@ -22,6 +23,9 @@ void draw() {
   if (estadoJuego == 0) {
     menu.mostrar();
   } else if (estadoJuego == 1) {
+    
+    background(0);
+    
     imageMode(CORNER);
     mapa.mostrar();
     
@@ -57,7 +61,8 @@ void mousePressed() {
 void keyPressed() {
   if (key == 'r' || key == 'R') {
     tanque1 = new Tanque1(600, 600);
-    torreta = new Torreta(tanque1);
+  torreta = new Torreta();
+torreta.tanque = tanque1;
     proyectiles.clear();
   }
 }
