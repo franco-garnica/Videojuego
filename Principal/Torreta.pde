@@ -27,7 +27,7 @@ class Torreta {
 
     rectMode(CENTER);
     
- image(imagenTorreta, 0, 0);
+ image(imagenTorreta, 0, -13);
     
     popMatrix();
     
