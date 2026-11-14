@@ -1,18 +1,18 @@
-
 class Tanque1 {
 
   PImage imagenTanque1;
 
   float x;
   float y;
-
-  float velocidad = 8;
-
+  float velocidad = 4;
+  
+// pasar a variables con calculos
   float ancho = 33;
   float alto = 25;
 
   float angulo = 0;
-
+// pasar a variables con calculos
+  
   int vidas = 3;
 
 
@@ -26,7 +26,7 @@ class Tanque1 {
     imagenTanque1 = loadImage("TanquePesado.png");
 
     // Cambiar tamaño de la imagen
-    imagenTanque1.resize(120, 120);
+    imagenTanque1.resize(120, 120); //cambiar a valores x, y
   }
 
 
