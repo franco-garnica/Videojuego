@@ -9,17 +9,17 @@ class Proyectil {
     vel.mult(8);
 
     imagenBala = loadImage("Bala.png");
-    imagenBala.resize(40,40);
+    imagenBala.resize(40,40); // cambiar a variable con calculo
   }
 
   void mover() {
     pos.add(vel);
 
-    if (mapa.colisiona(pos.x + vel.x, pos.y, 8, 8)) {
+    if (mapa.colisiona(pos.x + vel.x, pos.y, 8, 8)) { //calculo
       vel.x *= -1;
     }
 
-    if (mapa.colisiona(pos.x, pos.y + vel.y, 8, 8)) {
+    if (mapa.colisiona(pos.x, pos.y + vel.y, 8, 8)) { // calculo
       vel.y *= -1;
     }
   }
