@@ -1,4 +1,5 @@
 int estadoJuego = 0;
+int skinElegida = 0;
 Menu menu;
 Mapa mapa;
 Tanque1 tanque1;
