@@ -21,9 +21,11 @@ class Tanque1 {
 
     x = xInicial;
     y = yInicial;
-
-    // Cargar imagen del tanque
-    imagenTanque1 = loadImage("TanquePesado.png");
+ if (skin == 0) {
+    imagenTanque1 = loadImage("TanqueEje.png");
+  } else {
+    imagenTanque1 = loadImage("TanqueAliados.png");
+  }
 
     // Cambiar tamaño de la imagen
     imagenTanque1.resize(120, 120); //cambiar a valores x, y
