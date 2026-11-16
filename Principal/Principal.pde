@@ -14,7 +14,7 @@ void setup() {
 
   menu = new Menu();
   mapa = new Mapa();
-  tanque1 = new Tanque1(600, 600);
+  tanque1 = new Tanque1(600, 600, skinElegida);
   torreta = new Torreta();
   torreta.tanque = tanque1;
   interfaz = new Interfaz();
@@ -61,7 +61,7 @@ void mousePressed() {
 
 void keyPressed() {
   if (key == 'r' || key == 'R') {
-    tanque1 = new Tanque1(600, 600);
+    tanque1 = new Tanque1(600, 600, skinElegida);
   torreta = new Torreta();
 torreta.tanque = tanque1;
     proyectiles.clear();
