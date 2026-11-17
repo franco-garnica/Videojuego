@@ -1,3 +1,4 @@
+
 class Tanque1 {
 
   PImage imagenTanque1;
@@ -5,30 +6,29 @@ class Tanque1 {
   float x;
   float y;
   float velocidad = 4;
-  
-// pasar a variables con calculos
+
   float ancho = 33;
   float alto = 25;
 
   float angulo = 0;
-// pasar a variables con calculos
-  
+
   int vidas = 3;
 
 
   // Constructor
-  Tanque1(float xInicial, float yInicial) {
+  Tanque1(float xInicial, float yInicial, int skin) {
 
     x = xInicial;
     y = yInicial;
- if (skin == 0) {
-    imagenTanque1 = loadImage("TanqueEje.png");
-  } else {
-    imagenTanque1 = loadImage("TanqueAliados.png");
-  }
+
+    if (skin == 0) {
+      imagenTanque1 = loadImage("TanqueEje.png");
+    } else {
+      imagenTanque1 = loadImage("TanqueAliados.png");
+    }
 
     // Cambiar tamaño de la imagen
-    imagenTanque1.resize(120, 120); //cambiar a valores x, y
+    imagenTanque1.resize(120, 120);
   }
 
 
