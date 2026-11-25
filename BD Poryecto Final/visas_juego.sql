@@ -2,11 +2,15 @@ USE BattleTankRetro;
 GO
 
 CREATE VIEW vw_Mapas AS
-SELECT *
+SELECT
+    NumeroMapa,
+    Nombre,
+    ArchivoFondo,
+    ArchivoPared
 FROM Mapa;
 GO
 
-CREATE VIEW vw_Paredes AS
+CREATE VIEW vw_DistribucionParedes AS
 SELECT
     Mapa.Nombre,
     MapaPared.ColumnaInicio,
@@ -23,6 +27,7 @@ SELECT
     Jugador.NombreUsuario,
     Mapa.Nombre AS Mapa,
     Partida.FechaInicio,
+    Partida.FechaFin,
     Partida.Resultado
 FROM Partida
 INNER JOIN Campania
@@ -36,10 +41,13 @@ GO
 CREATE VIEW vw_ProgresoCampanias AS
 SELECT
     Jugador.NombreUsuario,
+    Skin.Nombre AS TanqueElegido,
     Campania.NumeroMapaActual,
     Campania.VidasRestantes,
     Campania.Estado
 FROM Campania
 INNER JOIN Jugador
-ON Campania.IdJugador = Jugador.IdJugador;
+ON Campania.IdJugador = Jugador.IdJugador
+INNER JOIN Skin
+ON Campania.IdSkinJugador = Skin.IdSkin;
 GO
