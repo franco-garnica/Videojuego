@@ -36,6 +36,12 @@ CREATE TABLE MapaPared (
     FOREIGN KEY (IdMapa) REFERENCES Mapa(IdMapa)
 );
 
+CREATE TABLE RecursoVisual (
+    IdRecurso INT IDENTITY(1,1) PRIMARY KEY,
+    Nombre VARCHAR(50),
+    Archivo VARCHAR(100)
+);
+
 CREATE TABLE Jugador (
     IdJugador INT IDENTITY(1,1) PRIMARY KEY,
     NombreUsuario VARCHAR(50) NOT NULL,
@@ -70,10 +76,8 @@ CREATE TABLE ParticipantePartida (
     IdParticipante INT IDENTITY(1,1) PRIMARY KEY,
     IdPartida INT NOT NULL,
     TipoParticipante VARCHAR(20),
-    IdFaccion INT NOT NULL,
     IdSkin INT NOT NULL,
     VidasFinales INT,
     FOREIGN KEY (IdPartida) REFERENCES Partida(IdPartida),
-    FOREIGN KEY (IdFaccion) REFERENCES Faccion(IdFaccion),
     FOREIGN KEY (IdSkin) REFERENCES Skin(IdSkin)
 );
