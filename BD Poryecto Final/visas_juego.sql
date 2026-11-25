@@ -1,33 +1,45 @@
 USE BattleTankRetro;
 GO
 
-CREATE VIEW VistaHistorialPartidas
-AS
-SELECT
-    Partida.id_partida,
-    Jugador.nombre AS Jugador,
-    Mapa.nombre AS Mapa,
-    Skin.nombre AS Skin,
-    Partida.hora_inicio,
-    Partida.hora_fin,
-    Partida.resultado,
-    Partida.puntuacion,
-    Partida.vidas_restantes
-
-FROM Partida
-
-INNER JOIN Jugador
-ON Partida.id_jugador = Jugador.id_jugador
-
-INNER JOIN Mapa
-ON Partida.id_mapa = Mapa.id_mapa
-
-INNER JOIN Skin
-ON Partida.id_skin = Skin.id_skin;
+CREATE VIEW vw_Mapas AS
+SELECT *
+FROM Mapa;
 GO
 
+CREATE VIEW vw_Paredes AS
+SELECT
+    Mapa.Nombre,
+    MapaPared.ColumnaInicio,
+    MapaPared.FilaInicio,
+    MapaPared.AnchoCasilleros,
+    MapaPared.AltoCasilleros
+FROM Mapa
+INNER JOIN MapaPared
+ON Mapa.IdMapa = MapaPared.IdMapa;
+GO
 
--- CONSULTAR EL HISTORIAL
+CREATE VIEW vw_HistorialPartidas AS
+SELECT
+    Jugador.NombreUsuario,
+    Mapa.Nombre AS Mapa,
+    Partida.FechaInicio,
+    Partida.Resultado
+FROM Partida
+INNER JOIN Campania
+ON Partida.IdCampania = Campania.IdCampania
+INNER JOIN Jugador
+ON Campania.IdJugador = Jugador.IdJugador
+INNER JOIN Mapa
+ON Partida.IdMapa = Mapa.IdMapa;
+GO
 
-SELECT * FROM VistaHistorialPartidas;
+CREATE VIEW vw_ProgresoCampanias AS
+SELECT
+    Jugador.NombreUsuario,
+    Campania.NumeroMapaActual,
+    Campania.VidasRestantes,
+    Campania.Estado
+FROM Campania
+INNER JOIN Jugador
+ON Campania.IdJugador = Jugador.IdJugador;
 GO
